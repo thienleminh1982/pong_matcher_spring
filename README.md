@@ -29,13 +29,13 @@ Build the app.
 
 ```bash
 cd app
-./gradlew build
+brew install maven
+mvn package
 ```
 
 Push the app. Its manifest assumes you called your ClearDB instance 'mysql'.
 
 ```bash
-cd app
 cf push -n mysubdomain
 ```
 
@@ -68,11 +68,11 @@ GRANT ALL ON pong_matcher_spring_development.* TO 'springpong'@'localhost';
 exit
 ```
 
-Start the application server:
+Start the application server from your IDE or the command line:
 
 ```bash
 cd app
-./gradlew bootRun
+mvn spring-boot:run
 ```
 
 Export the test host
