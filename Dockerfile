@@ -12,8 +12,9 @@ RUN     adduser --disabled-password web
 ADD     https://cli.run.pivotal.io/stable?release=debian64&source=github cf.deb
 RUN     dpkg -i cf.deb
 
-# install java
+# install java and maven
 RUN     apt-get install -y openjdk-8-jdk
+RUN 	apt-get install -y maven
 
 # install app as unprivileged user
 ADD         app pong_matcher_spring
@@ -22,4 +23,4 @@ RUN         chown -R web:web pong_matcher_spring
 USER        web
 ENV         JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
-RUN         cd pong_matcher_spring; ./gradlew build
+RUN         cd pong_matcher_spring; mvn -e package
