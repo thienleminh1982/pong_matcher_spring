@@ -31,7 +31,7 @@ public final class ResultsControllerTest {
                 .content("{\"winner\": \"test-winner\", \"loser\": \"test-loser\", \"match_id\": \"test-match-id\"}"))
                 .andExpect(status().isCreated());
 
-        verify(this.resultRepository).save(any(Result.class));
+        verify(this.resultRepository).saveAndFlush(any(Result.class));
     }
 
     @Test
@@ -40,6 +40,6 @@ public final class ResultsControllerTest {
                 new Result("test-winner", "test-loser", "test-match-id"));
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        verify(this.resultRepository).save(any(Result.class));
+        verify(this.resultRepository).saveAndFlush(any(Result.class));
     }
 }
