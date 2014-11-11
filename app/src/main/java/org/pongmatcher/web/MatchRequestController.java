@@ -55,13 +55,22 @@ final class MatchRequestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/match_requests/{id}")
     ResponseEntity<Map<String, String>> show(@PathVariable String id) {
-        Match match = matchRepository.findByMatchRequest1IdOrMatchRequest2Id(id, id);
+        MatchRequest matchRequest = matchRequestRepository.findByUuid(id);
 
-        if (match == null) {
+        if (matchRequest == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
+            Match match = matchRepository.findByMatchRequest1IdOrMatchRequest2Id(id, id);
             Map<String, String> body = new HashMap<>();
-            body.put("match_id", match.getId());
+
+            body.put("id", matchRequest.getUuid());
+            body.put("player", matchRequest.getRequesterId());
+
+            if (match == null) {
+                body.put("match_id", null);
+            } else {
+                body.put("match_id", match.getId());
+            }
 
             return new ResponseEntity<>(body, HttpStatus.OK);
         }
