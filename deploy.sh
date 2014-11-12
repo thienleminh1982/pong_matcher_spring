@@ -2,6 +2,7 @@
 
 set -xe
 
+docker pull docker.gocd.cf-app.com:5000/pong-matcher-spring
 docker run -e "CF_HOME=/pong_matcher_spring" -t docker.gocd.cf-app.com:5000/pong-matcher-spring /bin/bash -c "\
     cd pong_matcher_spring
     cf api https://api.run.pivotal.io &&
