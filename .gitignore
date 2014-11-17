@@ -1,5 +1,8 @@
-.gradle
-tags
-app/build
-.idea
 app.iml
+build
+.gradle
+.idea/libraries
+.idea/tasks.xml
+.idea/workspace.xml
+tags
+target

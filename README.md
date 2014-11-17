@@ -28,7 +28,6 @@ cf create-service cleardb spark mysql
 Build the app.
 
 ```bash
-cd app
 brew install maven
 mvn package
 ```
@@ -71,7 +70,6 @@ exit
 Start the application server from your IDE or the command line:
 
 ```bash
-cd app
 mvn spring-boot:run
 ```
 
