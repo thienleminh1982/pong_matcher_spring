@@ -1,6 +1,5 @@
 app.iml
 build
-.gradle
 .idea/libraries
 .idea/tasks.xml
 .idea/workspace.xml
