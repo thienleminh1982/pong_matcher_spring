@@ -5,6 +5,8 @@ API only, so you have to use `curl` to interact with it.
 
 It has an [acceptance test suite][acceptance-test] you might like to look at.
 
+**Note**: When We highly recommend that you use the latest versions of any software required by this sample application. For example, make sure that you are using the most recent verion of maven.
+
 ## Running on [Pivotal Web Services][pws]
 
 Log in.
