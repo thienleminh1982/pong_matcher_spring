@@ -60,17 +60,16 @@ Target your org / space.
 cf target -o myorg -s myspace
 ```
 
-Sign up for a cleardb instance.
+Sign up for a PostgreSQL instance, name it: "psql"
 
 ```bash
-cf create-service cleardb spark mysql
+cf create-service elephantsql turtle psql
 ```
 
 Build the app.
 
 ```bash
-brew install maven
-mvn package
+mvn clean package
 ```
 
 Push the app. Its manifest assumes you called your ClearDB instance 'mysql'.
@@ -102,6 +101,31 @@ grant all privileges on database pong_matcher_spring_development to springpong;
 Connect to the new created database:
 psql -U springpong  pong_matcher_spring_development
 
+**Note**:
+/* lmthien: SERIAL keyword is PostgreSQL specific, equivalent to AUTO_INCREMENT */
+/* lmthien: AUTO_INCREMENT keyword is MySQL specific
+CREATE TABLE match_request (
+  id           BIGINT PRIMARY KEY AUTO_INCREMENT,
+  uuid         VARCHAR(255) NOT NULL,
+  requester_id VARCHAR(255) NOT NULL,
+
+  CONSTRAINT unique_uuid UNIQUE (uuid)
+);
+*/
+
+/* 
+ * Match is not a reserved keyword in psql
+ * http://www.postgresql.org/docs/9.2/static/sql-keywords-appendix.html
+ */
+/* lmthien: MySQL specific: match is a keyword. Thus have to enclose it with ` 
+CREATE TABLE `match` (
+  id               VARCHAR(255) PRIMARY KEY,
+  match_request1id VARCHAR(255) NOT NULL,
+  match_request2id VARCHAR(255) NOT NULL
+);
+*/
+
+==========================================================
 Start the application server from your IDE or the command line:
 
 ```bash

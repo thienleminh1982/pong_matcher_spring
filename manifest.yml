@@ -1,8 +1,8 @@
 ---
 applications:
-  - name: lmt-springpong-postgres
+  - name: lmt-springpong-psql
     memory: 512M
     buildpack: java_buildpack
     path: target/pong-matcher-spring-1.0.0.BUILD-SNAPSHOT.jar
     services:
-      - postgresql_db
+      - psql
