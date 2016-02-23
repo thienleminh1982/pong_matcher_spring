@@ -7,4 +7,4 @@ spring:
     password: springpong
   jpa:
     hibernate.ddl-auto: none
-    show_sql: false
+    show-sql: false

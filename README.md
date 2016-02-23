@@ -1,3 +1,44 @@
+**ping-pong matching server** 
+	This is a Spring Boot application deployed on PivotalCF, using a mysql service as database.
+
+Original git repo: https://github.com/cloudfoundry-samples/pong_matcher_spring
+
+Modified by: **Minh-Thien Le**
+
+Time spent: **** hours spent in total
+
+Deployed URL: **http://lmt-springpong-origin.cfapps.io**
+
+## User Stories
+
+The following **original** functionality is complete and working in the original git repo:
+* [x] PUT {HOST}/match_requests/{id}
+* [x] GET {HOST}/match_requests/{id}
+* [x] POST {HOST}/results, e.g: request body:
+		{
+		"match_id":"thematchidyoureceived",
+		"winner":"andrew",
+		"loser":"navratilova"
+		}
+* [x] GET {{HOST}}/matches/{id}
+* [x] DELETE {HOST}/all
+
+The following **modified** features are implemented by **Minh-Thien Le**
+* [x] Add welcome message in the root path:
+	{"root_page_welcome":"Welcome to pong-matcher-spring application updated!"}
+* [x] GET {HOST}/results : get all results from db table "result"
+	
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+## Notes
+* Upgraded to latest Spring Boot 1.3.2
+* Test the APIs by POSTMAN to send REST requests.
+* This app has been working on both PWS and local.
+
+=================================================================================
 # CF example app: ping-pong matching server
 
 This is an app to match ping-pong players with each other. It's currently an
