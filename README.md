@@ -81,9 +81,17 @@ export HOST=http://mysubdomain.cfapps.io
 ```
 
 ## Deployment on Heroku
-Add the Procfile containing metadata for Heroku specific deployment
+Add the Procfile containing metadata for Heroku specific deployment.
+As the Procfile tells Heroku that this is a web application, a PostgreSQL service will be **automatically created and binded to this application during deployment**.
 
 Edit **application.yml**: must configure the **spring.datasource.url = ${JDBC_DATABASE_URL}**
+
+Then, run these commands:
+
+```bash
+heroku create
+git push heroku <your-branch>:master
+```
 
 ## Running locally with PostgreSQL
 
@@ -100,9 +108,12 @@ grant all privileges on database pong_matcher_spring_development to springpong;
 ```
 
 Edit **application.yml**: must configure the spring.datasource something like:
-    url: jdbc:postgresql://localhost:5432/pong_matcher_spring_development
-    username: springpong
-    password: springpong
+
+```yml
+url: jdbc:postgresql://localhost:5432/pong_matcher_spring_development
+username: springpong
+password: springpong
+```
     
 Re-build the app.
 
