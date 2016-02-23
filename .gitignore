@@ -6,3 +6,6 @@ build
 .idea/workspace.xml
 tags
 target
+.settings
+.classpath
+.project

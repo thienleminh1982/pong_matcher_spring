@@ -4,9 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 import java.util.UUID;
 
 @Entity
+@Table(name = "result")
 public final class Result {
 
     @Id

@@ -1,5 +1,5 @@
 **ping-pong matching server** 
-	This is a Spring Boot application deployed on PivotalCF, using a mysql service as database.
+	This is a Spring Boot application deployed on PivotalCF, using a PostgreSQL service as database.
 
 Original git repo: https://github.com/cloudfoundry-samples/pong_matcher_spring
 
@@ -44,11 +44,9 @@ Here's a walkthrough of implemented user stories:
 This is an app to match ping-pong players with each other. It's currently an
 API only, so you have to use `curl` to interact with it.
 
-It has an [acceptance test suite][acceptance-test] you might like to look at.
-
 **Note**: We highly recommend that you use the latest versions of any software required by this sample application. For example, make sure that you are using the most recent verion of maven.
 
-## Running on [Pivotal Web Services][pws]
+## Running on Pivotal Web Services
 
 Log in.
 
@@ -87,28 +85,22 @@ Export the test host
 export HOST=http://mysubdomain.cfapps.io
 ```
 
-Now follow the [interaction instructions][interaction].
-
-## Running locally
+## Running locally with PostgreSQL
 
 The following assumes you have a working Java 1.8 SDK installed.
 
-Install and start mysql:
+Install and start PostgreSQL:
 
-```bash
-brew install mysql
-mysql.server start
-mysql -u root
-```
-
-Create a database user and table in the MySQL REPL you just opened:
+Create a database user and table:
 
 ```sql
-CREATE USER 'springpong'@'localhost' IDENTIFIED BY 'springpong';
-CREATE DATABASE pong_matcher_spring_development;
-GRANT ALL ON pong_matcher_spring_development.* TO 'springpong'@'localhost';
-exit
+CREATE USER springpong with password 'springpong' CREATEDB;
+create database pong_matcher_spring_development with owner springpong ENCODING 'UTF8';
+grant all privileges on database pong_matcher_spring_development to springpong;
 ```
+
+Connect to the new created database:
+psql -U springpong  pong_matcher_spring_development
 
 Start the application server from your IDE or the command line:
 
@@ -122,7 +114,7 @@ Export the test host
 export HOST=http://localhost:8080
 ```
 
-Now follow the [interaction instructions][interaction].
+Now follow the interaction instructions interaction.
 
 [acceptance-test]:https://github.com/cloudfoundry-samples/pong_matcher_acceptance
 [pws]:https://run.pivotal.io

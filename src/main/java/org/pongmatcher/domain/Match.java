@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "`match`")
+@Table(name = "match")
 public final class Match {
     @Id
     private volatile String id;
