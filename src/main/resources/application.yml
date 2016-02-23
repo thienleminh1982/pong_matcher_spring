@@ -2,9 +2,7 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/pong_matcher_spring_development
-    username: springpong
-    password: springpong
+    url: ${JDBC_DATABASE_URL}
   jpa:
     hibernate.ddl-auto: none
     show-sql: true

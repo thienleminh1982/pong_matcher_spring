@@ -1,1 +1,1 @@
-﻿web: java -Dserver.port=$PORT -jar target/pong-matcher-spring-1.0.0.BUILD-SNAPSHOT.jar
+﻿web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/pong-matcher-spring-1.0.0.BUILD-SNAPSHOT.jar
