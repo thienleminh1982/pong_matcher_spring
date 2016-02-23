@@ -2,7 +2,12 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
+    # Use this for deployment on Heroku, the variable JDBC_DATABASE_URL will be generated at runtime
     url: ${JDBC_DATABASE_URL}
+    # Uncomment the following for running on local environment
+    # url: jdbc:postgresql://localhost:5432/pong_matcher_spring_development
+    # username: springpong
+    # password: springpong
   jpa:
     hibernate.ddl-auto: none
     show-sql: true

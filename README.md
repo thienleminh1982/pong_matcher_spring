@@ -1,5 +1,6 @@
 **ping-pong matching server** 
-	This is a Spring Boot application deployed on PivotalCF, using a PostgreSQL service as database.
+	This is a Spring Boot application deployed on PWS or Heroku
+	,using a PostgreSQL service as database.
 
 Original git repo: https://github.com/cloudfoundry-samples/pong_matcher_spring
 
@@ -36,14 +37,9 @@ Here's a walkthrough of implemented user stories:
 ## Notes
 * Upgraded to latest Spring Boot 1.3.2
 * Test the APIs by POSTMAN to send REST requests.
-* This app has been working on both PWS and local.
+* This app has been working on both PWS, Heroku and local.
 
 =================================================================================
-# CF example app: ping-pong matching server
-
-This is an app to match ping-pong players with each other. It's currently an
-API only, so you have to use `curl` to interact with it.
-
 **Note**: We highly recommend that you use the latest versions of any software required by this sample application. For example, make sure that you are using the most recent verion of maven.
 
 ## Running on Pivotal Web Services
@@ -84,6 +80,11 @@ Export the test host
 export HOST=http://mysubdomain.cfapps.io
 ```
 
+## Deployment on Heroku
+Add the Procfile containing metadata for Heroku specific deployment
+
+Edit **application.yml**: must configure the **spring.datasource.url = ${JDBC_DATABASE_URL}**
+
 ## Running locally with PostgreSQL
 
 The following assumes you have a working Java 1.8 SDK installed.
@@ -98,10 +99,24 @@ create database pong_matcher_spring_development with owner springpong ENCODING '
 grant all privileges on database pong_matcher_spring_development to springpong;
 ```
 
-Connect to the new created database:
-psql -U springpong  pong_matcher_spring_development
+Edit **application.yml**: must configure the spring.datasource something like:
+    url: jdbc:postgresql://localhost:5432/pong_matcher_spring_development
+    username: springpong
+    password: springpong
+    
+Re-build the app.
 
-**Note**:
+```bash
+mvn clean package
+```
+
+Start the application server from your IDE or the command line:
+
+```bash
+mvn spring-boot:run
+```
+=========================================================================
+**Note**: some minor notes on migrate the sql scripts from Mysql to Postgresql:
 /* lmthien: SERIAL keyword is PostgreSQL specific, equivalent to AUTO_INCREMENT */
 /* lmthien: AUTO_INCREMENT keyword is MySQL specific
 CREATE TABLE match_request (
@@ -126,18 +141,6 @@ CREATE TABLE `match` (
 */
 
 ==========================================================
-Start the application server from your IDE or the command line:
-
-```bash
-mvn spring-boot:run
-```
-
-Export the test host
-
-```bash
-export HOST=http://localhost:8080
-```
-
 Now follow the interaction instructions interaction.
 
 [acceptance-test]:https://github.com/cloudfoundry-samples/pong_matcher_acceptance
